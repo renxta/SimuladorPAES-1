@@ -21,7 +21,7 @@ DB_PASS=WsuGr8Tm4DqoIH7xzaV8usIC37Bh5K1Q
 
 Instalar dependencias:
 
-pip install -r requirements.txt
+pip install fastapi uvicorn sqlalchemy psycopg2-binary python-dotenv pandas alembic
 
 
 Correr el backend:

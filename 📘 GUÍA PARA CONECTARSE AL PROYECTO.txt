@@ -40,7 +40,7 @@ def get_db():
 
 📦 Paso 4: Instalar las dependencias
 Ejecutar en la terminal (dentro de la carpeta backend):
-pip install -r requirements.txt
+pip install fastapi uvicorn sqlalchemy psycopg2-binary python-dotenv pandas alembic
 
 
 🚀 Paso 5: Levantar el backend
@@ -62,3 +62,9 @@ GET /carreras → debe mostrar 120 carreras
 
 
 Si ves eso, significa
+
+🗄️ 2.3. Base de Datos
+
+Sistema: PostgreSQL (migrado desde MySQL por compatibilidad y rendimiento)
+
+Alojamiento: Render (base de datos en la nube con acceso remoto)
