@@ -11,13 +11,11 @@ function App() {
       <header className="navbar">
         <div className="navbar-content">
           <Link to="/" className="logo">SimuladorPAES</Link>
-          <input type="text" className="search-bar" placeholder="Buscar universidad..." />
           <nav>
             <ul className="nav-links">
               <li><Link to="/">Inicio</Link></li>
               <li><Link to="/simulador">Simular</Link></li>
               <li><Link to="/opciones">Opciones</Link></li>
-              <li><Link to="/detalles">Detalles</Link></li>
             </ul>
           </nav>
         </div>
