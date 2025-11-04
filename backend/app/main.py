@@ -82,8 +82,26 @@ def health():
 
 # Montar archivos estáticos al final para que las rutas de la API tengan prioridad
 if os.path.isdir(static_dir):
-    # Usamos la ruta absoluta para evitar problemas con cwd
-    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+    # El build de React tiene una carpeta `static/` con assets y un `index.html` en la raíz.
+    assets_dir = os.path.join(static_dir, "static")
+    index_file = os.path.join(static_dir, "index.html")
+
+    # Servimos assets (js/css/images) desde /static para que las rutas del API
+    # (prefijo /api) y los POST no sean interceptados por StaticFiles.
+    if os.path.isdir(assets_dir):
+        app.mount("/static", StaticFiles(directory=assets_dir), name="static_assets")
+    else:
+        logging.warning(f"Static assets directory not found at {assets_dir}.")
+
+    # Ruta catch-all para devolver index.html en peticiones GET (SPA fallback).
+    # IMPORTANTE: esto solo responde a GET, por lo que POST/PUT/DELETE a /api/*
+    # seguirán siendo atendidos por los endpoints de la API registrados arriba.
+    if os.path.exists(index_file):
+        @app.get("/{full_path:path}")
+        async def spa_index(full_path: str):
+            return FileResponse(index_file)
+    else:
+        logging.warning(f"Index file not found at {index_file}. Frontend will not be served.")
 else:
     logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
 
