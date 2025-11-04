@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Fv6SLNRaC6lP2UOPOvCLIt2rDOaGmgcrNPvKTyinE7EoOtgxbVI3z9bE33wF6YE
+\restrict lgtmlsmJ6Nx7sZDjyYjRGcZn9xopQZ6D4drCbFH30QTjf90WBMIqjqQ3pAdKZIa
 
 -- Dumped from database version 18.0
 -- Dumped by pg_dump version 18.0
@@ -20,14 +20,16 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
 -- *not* creating schema, since initdb creates it
 
 
+ALTER SCHEMA public OWNER TO postgres;
+
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
 --
 
 COMMENT ON SCHEMA public IS '';
@@ -38,7 +40,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: carreras; Type: TABLE; Schema: public; Owner: -
+-- Name: carreras; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.carreras (
@@ -52,8 +54,10 @@ CREATE TABLE public.carreras (
 );
 
 
+ALTER TABLE public.carreras OWNER TO postgres;
+
 --
--- Name: carreras_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: carreras_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.carreras_id_seq
@@ -65,15 +69,17 @@ CREATE SEQUENCE public.carreras_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.carreras_id_seq OWNER TO postgres;
+
 --
--- Name: carreras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: carreras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.carreras_id_seq OWNED BY public.carreras.id;
 
 
 --
--- Name: ponderaciones; Type: TABLE; Schema: public; Owner: -
+-- Name: ponderaciones; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.ponderaciones (
@@ -89,8 +95,10 @@ CREATE TABLE public.ponderaciones (
 );
 
 
+ALTER TABLE public.ponderaciones OWNER TO postgres;
+
 --
--- Name: ponderaciones_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ponderaciones_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ponderaciones_id_seq
@@ -102,15 +110,17 @@ CREATE SEQUENCE public.ponderaciones_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.ponderaciones_id_seq OWNER TO postgres;
+
 --
--- Name: ponderaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: ponderaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.ponderaciones_id_seq OWNED BY public.ponderaciones.id;
 
 
 --
--- Name: puntajes_corte; Type: TABLE; Schema: public; Owner: -
+-- Name: puntajes_corte; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.puntajes_corte (
@@ -121,8 +131,10 @@ CREATE TABLE public.puntajes_corte (
 );
 
 
+ALTER TABLE public.puntajes_corte OWNER TO postgres;
+
 --
--- Name: puntajes_corte_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: puntajes_corte_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.puntajes_corte_id_seq
@@ -134,15 +146,17 @@ CREATE SEQUENCE public.puntajes_corte_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.puntajes_corte_id_seq OWNER TO postgres;
+
 --
--- Name: puntajes_corte_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: puntajes_corte_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.puntajes_corte_id_seq OWNED BY public.puntajes_corte.id;
 
 
 --
--- Name: simulaciones; Type: TABLE; Schema: public; Owner: -
+-- Name: simulaciones; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.simulaciones (
@@ -160,8 +174,10 @@ CREATE TABLE public.simulaciones (
 );
 
 
+ALTER TABLE public.simulaciones OWNER TO postgres;
+
 --
--- Name: simulaciones_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: simulaciones_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.simulaciones_id_seq
@@ -173,15 +189,17 @@ CREATE SEQUENCE public.simulaciones_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.simulaciones_id_seq OWNER TO postgres;
+
 --
--- Name: simulaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: simulaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.simulaciones_id_seq OWNED BY public.simulaciones.id;
 
 
 --
--- Name: universidades; Type: TABLE; Schema: public; Owner: -
+-- Name: universidades; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.universidades (
@@ -195,8 +213,10 @@ CREATE TABLE public.universidades (
 );
 
 
+ALTER TABLE public.universidades OWNER TO postgres;
+
 --
--- Name: universidades_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: universidades_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.universidades_id_seq
@@ -208,15 +228,17 @@ CREATE SEQUENCE public.universidades_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.universidades_id_seq OWNER TO postgres;
+
 --
--- Name: universidades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: universidades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.universidades_id_seq OWNED BY public.universidades.id;
 
 
 --
--- Name: vista_carreras_completa; Type: VIEW; Schema: public; Owner: -
+-- Name: vista_carreras_completa; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.vista_carreras_completa AS
@@ -241,43 +263,45 @@ CREATE VIEW public.vista_carreras_completa AS
      LEFT JOIN public.puntajes_corte pc ON ((pc.carrera_id = c.id)));
 
 
+ALTER VIEW public.vista_carreras_completa OWNER TO postgres;
+
 --
--- Name: carreras id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: carreras id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.carreras ALTER COLUMN id SET DEFAULT nextval('public.carreras_id_seq'::regclass);
 
 
 --
--- Name: ponderaciones id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: ponderaciones id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ponderaciones ALTER COLUMN id SET DEFAULT nextval('public.ponderaciones_id_seq'::regclass);
 
 
 --
--- Name: puntajes_corte id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: puntajes_corte id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.puntajes_corte ALTER COLUMN id SET DEFAULT nextval('public.puntajes_corte_id_seq'::regclass);
 
 
 --
--- Name: simulaciones id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: simulaciones id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.simulaciones ALTER COLUMN id SET DEFAULT nextval('public.simulaciones_id_seq'::regclass);
 
 
 --
--- Name: universidades id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: universidades id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.universidades ALTER COLUMN id SET DEFAULT nextval('public.universidades_id_seq'::regclass);
 
 
 --
--- Data for Name: carreras; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: carreras; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.carreras (id, nombre, codigo_demre, duracion, vacantes, arancel, universidad_id) FROM stdin;
@@ -405,7 +429,7 @@ COPY public.carreras (id, nombre, codigo_demre, duracion, vacantes, arancel, uni
 
 
 --
--- Data for Name: ponderaciones; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: ponderaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.ponderaciones (id, carrera_id, w_lenguaje, w_matematicas, w_matematicas2, w_ciencias, w_historia, w_nem, w_ranking) FROM stdin;
@@ -488,7 +512,7 @@ COPY public.ponderaciones (id, carrera_id, w_lenguaje, w_matematicas, w_matemati
 
 
 --
--- Data for Name: puntajes_corte; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: puntajes_corte; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.puntajes_corte (id, carrera_id, puntaje_minimo, ano) FROM stdin;
@@ -616,7 +640,7 @@ COPY public.puntajes_corte (id, carrera_id, puntaje_minimo, ano) FROM stdin;
 
 
 --
--- Data for Name: simulaciones; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: simulaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.simulaciones (id, carrera_id, puntaje_lenguaje, puntaje_matematicas, puntaje_matematicas2, puntaje_ciencias, puntaje_historia, puntaje_nem, puntaje_ranking, puntaje_total, fecha_simulacion) FROM stdin;
@@ -624,7 +648,7 @@ COPY public.simulaciones (id, carrera_id, puntaje_lenguaje, puntaje_matematicas,
 
 
 --
--- Data for Name: universidades; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: universidades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.universidades (id, nombre, acreditacion, sitio_web, direccion, latitud, longitud) FROM stdin;
@@ -640,42 +664,42 @@ COPY public.universidades (id, nombre, acreditacion, sitio_web, direccion, latit
 
 
 --
--- Name: carreras_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: carreras_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.carreras_id_seq', 120, true);
 
 
 --
--- Name: ponderaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: ponderaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ponderaciones_id_seq', 75, true);
 
 
 --
--- Name: puntajes_corte_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: puntajes_corte_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.puntajes_corte_id_seq', 120, true);
 
 
 --
--- Name: simulaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: simulaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.simulaciones_id_seq', 1, false);
 
 
 --
--- Name: universidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: universidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.universidades_id_seq', 8, true);
 
 
 --
--- Name: carreras carreras_codigo_demre_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: carreras carreras_codigo_demre_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.carreras
@@ -683,7 +707,7 @@ ALTER TABLE ONLY public.carreras
 
 
 --
--- Name: carreras carreras_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: carreras carreras_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.carreras
@@ -691,7 +715,7 @@ ALTER TABLE ONLY public.carreras
 
 
 --
--- Name: ponderaciones ponderaciones_carrera_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ponderaciones ponderaciones_carrera_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ponderaciones
@@ -699,7 +723,7 @@ ALTER TABLE ONLY public.ponderaciones
 
 
 --
--- Name: ponderaciones ponderaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ponderaciones ponderaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ponderaciones
@@ -707,7 +731,7 @@ ALTER TABLE ONLY public.ponderaciones
 
 
 --
--- Name: puntajes_corte puntajes_corte_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: puntajes_corte puntajes_corte_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.puntajes_corte
@@ -715,7 +739,7 @@ ALTER TABLE ONLY public.puntajes_corte
 
 
 --
--- Name: simulaciones simulaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: simulaciones simulaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.simulaciones
@@ -723,7 +747,7 @@ ALTER TABLE ONLY public.simulaciones
 
 
 --
--- Name: universidades universidades_nombre_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: universidades universidades_nombre_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.universidades
@@ -731,7 +755,7 @@ ALTER TABLE ONLY public.universidades
 
 
 --
--- Name: universidades universidades_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: universidades universidades_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.universidades
@@ -739,7 +763,7 @@ ALTER TABLE ONLY public.universidades
 
 
 --
--- Name: carreras ux_carrera_univ; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: carreras ux_carrera_univ; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.carreras
@@ -747,7 +771,7 @@ ALTER TABLE ONLY public.carreras
 
 
 --
--- Name: puntajes_corte ux_pc_carrera_ano; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: puntajes_corte ux_pc_carrera_ano; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.puntajes_corte
@@ -755,7 +779,7 @@ ALTER TABLE ONLY public.puntajes_corte
 
 
 --
--- Name: carreras fk_carrera_univ; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: carreras fk_carrera_univ; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.carreras
@@ -763,7 +787,7 @@ ALTER TABLE ONLY public.carreras
 
 
 --
--- Name: puntajes_corte fk_pc_carrera; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: puntajes_corte fk_pc_carrera; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.puntajes_corte
@@ -771,7 +795,7 @@ ALTER TABLE ONLY public.puntajes_corte
 
 
 --
--- Name: ponderaciones fk_ponderacion_carrera; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: ponderaciones fk_ponderacion_carrera; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ponderaciones
@@ -779,7 +803,7 @@ ALTER TABLE ONLY public.ponderaciones
 
 
 --
--- Name: simulaciones fk_sim_carrera; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: simulaciones fk_sim_carrera; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.simulaciones
@@ -787,9 +811,16 @@ ALTER TABLE ONLY public.simulaciones
 
 
 --
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Fv6SLNRaC6lP2UOPOvCLIt2rDOaGmgcrNPvKTyinE7EoOtgxbVI3z9bE33wF6YE
-
+\unrestrict lgtmlsmJ6Nx7sZDjyYjRGcZn9xopQZ6D4drCbFH30QTjf90WBMIqjqQ3pAdKZIa
 
