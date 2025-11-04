@@ -26,6 +26,7 @@ class SimularRequest(BaseModel):
     ranking: float = 0
     universidad: Optional[str] = Field(None, description="Filtro contiene (case-insensitive)")
     carrera: Optional[str] = Field(None, description="Filtro contiene (case-insensitive)")
+    area: Optional[str] = None  #Nuevo filtro directo
     limit: int = 30
 
 class OpcionPostulacion(BaseModel):
