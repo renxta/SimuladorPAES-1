@@ -7,6 +7,7 @@ import os
 import logging
 import time
 from starlette.requests import Request
+from fastapi.responses import JSONResponse
 
 app = FastAPI(
     title="Simulador PAES API",
@@ -49,6 +50,30 @@ async def log_requests(request: Request, call_next):
     process_time = (time.time() - start_time) * 1000
     logging.info(f"{request.client.host if request.client else 'unknown'} - {request.method} {request.url.path} -> {response.status_code} ({process_time:.2f}ms)")
     return response
+
+
+# Endpoint de diagnóstico disponible solo si DEBUG=1 o true
+def _is_debug_enabled():
+    return os.getenv("DEBUG", "").lower() in ("1", "true")
+
+
+if _is_debug_enabled():
+    @app.get("/__debug", tags=["debug"])
+    def debug_info():
+        try:
+            files = []
+            if os.path.isdir(static_dir):
+                files = sorted(os.listdir(static_dir))
+        except Exception:
+            files = ["<error listing files>"]
+        info = {
+            "static_exists": os.path.isdir(static_dir),
+            "static_listing": files,
+            "pid": os.getpid(),
+            "port_env": os.getenv("PORT"),
+            "debug": True,
+        }
+        return JSONResponse(info)
 
 # Endpoints base de verificación
 @app.get("/api", tags=["default"])
