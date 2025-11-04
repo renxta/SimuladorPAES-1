@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTTPException
 from . import simulador
 import os
 import logging
@@ -80,28 +80,24 @@ def health():
     return {"status": "ok"}
 
 
-# Montar archivos estáticos al final para que las rutas de la API tengan prioridad
+# Montar archivos estáticos DESPUÉS de todas las rutas de la API, y en rutas específicas
 if os.path.isdir(static_dir):
-    # El build de React tiene una carpeta `static/` con assets y un `index.html` en la raíz.
-    assets_dir = os.path.join(static_dir, "static")
-    index_file = os.path.join(static_dir, "index.html")
-
-    # Servimos assets (js/css/images) desde /static para que las rutas del API
-    # (prefijo /api) y los POST no sean interceptados por StaticFiles.
-    if os.path.isdir(assets_dir):
-        app.mount("/static", StaticFiles(directory=assets_dir), name="static_assets")
-    else:
-        logging.warning(f"Static assets directory not found at {assets_dir}.")
-
-    # Ruta catch-all para devolver index.html en peticiones GET (SPA fallback).
-    # IMPORTANTE: esto solo responde a GET, por lo que POST/PUT/DELETE a /api/*
-    # seguirán siendo atendidos por los endpoints de la API registrados arriba.
-    if os.path.exists(index_file):
+    # Los archivos js/css de React van en /static
+    static_assets = os.path.join(static_dir, "static")
+    if os.path.isdir(static_assets):
+        app.mount("/static", StaticFiles(directory=static_assets), name="static")
+    
+    # El index.html se sirve para rutas que NO empiecen con /api
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
         @app.get("/{full_path:path}")
-        async def spa_index(full_path: str):
-            return FileResponse(index_file)
+        async def serve_spa(full_path: str):
+            # No servir el SPA para rutas /api/* - dejar que FastAPI maneje 404 para APIs
+            if full_path.startswith("api/"):
+                raise HTTPException(status_code=404, detail="API endpoint not found")
+            return FileResponse(index_path)
     else:
-        logging.warning(f"Index file not found at {index_file}. Frontend will not be served.")
+        logging.warning(f"Index file not found at {index_path}. Frontend will not be served.")
 else:
     logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
 
