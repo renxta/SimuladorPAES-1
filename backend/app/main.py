@@ -32,22 +32,10 @@ def root_api():
 def health():
     return {"status": "ok"}
 
-# ---------------------------
-# 🚀 Servir el frontend React
-# ---------------------------
-frontend_path = os.path.join(os.path.dirname(__file__), "../../frontend/build")
+@app.get("/", tags=["default"])
+def root():
+    return "Hello world"
 
-if os.path.exists(frontend_path):
-    app.mount("/static", StaticFiles(directory=os.path.join(frontend_path, "static")), name="static")
-
-    @app.get("/")
-    def serve_react():
-        index_path = os.path.join(frontend_path, "index.html")
-        return FileResponse(index_path)
-else:
-    @app.get("/")
-    def no_frontend():
-        return {"msg": "Frontend no compilado. Ejecuta 'npm run build' en la carpeta frontend."}
 
 
 # ----------------------------
@@ -55,4 +43,4 @@ else:
 # ----------------------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app=app, host="0.0.0.0", port=8000, reload=True)
