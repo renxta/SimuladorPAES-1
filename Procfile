@@ -1,1 +1,1 @@
-web: pip install -r backend/requirements.txt && cd backend/app && /usr/local/bin/python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+web: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
