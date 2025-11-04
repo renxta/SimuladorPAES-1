@@ -65,7 +65,7 @@ function Simulador() {
         return;
       }
 
-      const { data } = await api.post("/simulador", payload)
+      const { data } = await api.post("/simulador/simular", payload)
 
       const resultados = Array.isArray(data) ? data : data.resultados;
 

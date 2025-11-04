@@ -59,7 +59,7 @@ function Simulador() {
     }
 
     try {
-      const { data } = await api.post("/simulador", payload)
+      const { data } = await api.post("/simulador/simular", payload)
 
       // ✅ Guardar resultados localmente
       localStorage.setItem("resultadosSimulacion", JSON.stringify(data.resultados));
