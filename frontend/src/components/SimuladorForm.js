@@ -56,7 +56,15 @@ function Simulador() {
     }
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/simulador/", {
+      // Construir URL del backend: usar REACT_APP_API_URL si está definida,
+      // de lo contrario usar ruta relativa para el mismo origen (útil cuando
+      // el backend sirve la app estática desde la misma URL en producción).
+      const apiBase = process.env.REACT_APP_API_URL
+        ? String(process.env.REACT_APP_API_URL).replace(/\/$/, "")
+        : "";
+      const url = apiBase ? `${apiBase}/simulador/` : `/simulador/`;
+
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

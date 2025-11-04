@@ -45,10 +45,9 @@ function Simulador() {
         matematicas2: parseFloat(formData.matematicas2) || 0,
         ciencias: parseFloat(formData.ciencias) || 0,
         historia: parseFloat(formData.historia) || 0,
-        nem: parseFloat(formData.nem) || 0,
-        ranking: parseFloat(formData.ranking) || 0,
-        nem: parseFloat(formData.nem) || 350, // valor por defecto
-        ranking: parseFloat(formData.ranking) || 350, // valor por defecto
+        // Valores por defecto razonables para producción si el usuario no ingresa nada
+        nem: parseFloat(formData.nem) || 350,
+        ranking: parseFloat(formData.ranking) || 350,
       };
 
 
@@ -63,7 +62,12 @@ function Simulador() {
         return;
       }
 
-      const res = await fetch("http://127.0.0.1:8000/simulador/", {
+      const apiBase = process.env.REACT_APP_API_URL
+        ? String(process.env.REACT_APP_API_URL).replace(/\/$/, "")
+        : "";
+      const url = apiBase ? `${apiBase}/simulador/` : `/simulador/`;
+
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

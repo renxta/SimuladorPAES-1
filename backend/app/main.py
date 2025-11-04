@@ -26,15 +26,9 @@ app.add_middleware(
 
 # Incluir router principal
 app.include_router(simulador.router)
-
-# Servir archivos estáticos construidos por React (se asume que están en backend/app/static)
+# Directorios base para estáticos (se usan más abajo, después de declarar endpoints)
 base_dir = os.path.dirname(__file__)
 static_dir = os.path.join(base_dir, "static")
-if os.path.isdir(static_dir):
-    # Usamos la ruta absoluta para evitar problemas con cwd
-    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
-else:
-    logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
 
 
 # Middleware para loguear cada petición (método, path, status y tiempo)
@@ -85,6 +79,12 @@ def health():
     return {"status": "ok"}
 
 
+# Montar archivos estáticos al final para que las rutas de la API tengan prioridad
+if os.path.isdir(static_dir):
+    # Usamos la ruta absoluta para evitar problemas con cwd
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+else:
+    logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
 
 # ----------------------------
 # EJECUCIÓN LOCAL (solo para dev)
