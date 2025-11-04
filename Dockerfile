@@ -22,8 +22,8 @@ COPY . .
 
 # Construye el frontend y mueve el build al backend/static
 RUN cd frontend && npm run build --silent \
-    && rm -rf backend/app/static || true \
-    && mv frontend/build backend/app/static
+    && rm -rf ../backend/app/static || true \
+    && mv build ../backend/app/static
 
 # Copia entrypoint
 COPY scripts/entrypoint.sh /entrypoint.sh

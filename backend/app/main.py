@@ -23,6 +23,9 @@ app.add_middleware(
 # Incluir router principal
 app.include_router(simulador.router)
 
+# Servir archivos estáticos construidos por React (se asume que están en backend/app/static)
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
+
 # Endpoints base de verificación
 @app.get("/api", tags=["default"])
 def root_api():
@@ -31,10 +34,6 @@ def root_api():
 @app.get("/health", tags=["default"])
 def health():
     return {"status": "ok"}
-
-@app.get("/", tags=["default"])
-def root():
-    return "Hello world"
 
 
 
