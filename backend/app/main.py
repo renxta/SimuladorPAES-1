@@ -24,8 +24,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Incluir router principal
-app.include_router(simulador.router)
+# Incluir router principal bajo el prefijo /api para que todas las rutas de la API
+# queden como /api/...
+app.include_router(simulador.router, prefix="/api")
 # Directorios base para estáticos (se usan más abajo, después de declarar endpoints)
 base_dir = os.path.dirname(__file__)
 static_dir = os.path.join(base_dir, "static")
@@ -52,7 +53,7 @@ def _is_debug_enabled():
 
 
 if _is_debug_enabled():
-    @app.get("/__debug", tags=["debug"])
+    @app.get("/api/__debug", tags=["debug"])
     def debug_info():
         try:
             files = []
@@ -74,7 +75,7 @@ if _is_debug_enabled():
 def root_api():
     return {"ok": True, "msg": "Simulador PAES API"}
 
-@app.get("/health", tags=["default"])
+@app.get("/api/health", tags=["default"])
 def health():
     return {"status": "ok"}
 
