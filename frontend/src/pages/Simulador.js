@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import { api } from "../services/api";
 
 function Simulador() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Simulador() {
     area: "",
     nem: "",
     ranking: "",
+    ano: "2025"
   });
 
   const [loading, setLoading] = useState(false);
@@ -48,6 +50,7 @@ function Simulador() {
         // Valores por defecto razonables para producción si el usuario no ingresa nada
         nem: parseFloat(formData.nem) || 350,
         ranking: parseFloat(formData.ranking) || 350,
+        ano: parseFloat(formData.ano) || 2025,
       };
 
 
@@ -62,20 +65,8 @@ function Simulador() {
         return;
       }
 
-      const apiBase = process.env.REACT_APP_API_URL
-        ? String(process.env.REACT_APP_API_URL).replace(/\/$/, "")
-        : "";
-      const url = apiBase ? `${apiBase}/simulador/` : `/simulador/`;
+      const { data } = await api.post("/simulador", payload)
 
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Error al conectar con el backend");
-
-      const data = await res.json();
       const resultados = Array.isArray(data) ? data : data.resultados;
 
       if (!resultados || resultados.length === 0) {

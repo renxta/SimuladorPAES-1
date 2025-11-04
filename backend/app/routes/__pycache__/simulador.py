@@ -52,7 +52,7 @@ def simular(req: schemas.SimularRequest, db: Session = Depends(get_db)):
     """)
 
     params = {
-        "ano": req.ano,
+        "ano": req.ano or 2025,
         "lenguaje": req.lenguaje,
         "mat1": req.matematicas,
         "mat2": req.matematicas2,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import { api } from "../services/api";
 
 function Simulador() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Simulador() {
     historia: "",
     nem: "",
     ranking: "",
+    ano: "2025"
   });
 
   const [loading, setLoading] = useState(false);
@@ -46,6 +48,7 @@ function Simulador() {
       historia: parseFloat(formData.historia) || 0,
       nem: parseFloat(formData.nem) || 0,
       ranking: parseFloat(formData.ranking) || 0,
+      ano: parseFloat(formData.ano) || 2025,
     };
 
     // Asegurarse de que todos los campos tengan valores correctos antes de enviar
@@ -56,23 +59,7 @@ function Simulador() {
     }
 
     try {
-      // Construir URL del backend: usar REACT_APP_API_URL si está definida,
-      // de lo contrario usar ruta relativa para el mismo origen (útil cuando
-      // el backend sirve la app estática desde la misma URL en producción).
-      const apiBase = process.env.REACT_APP_API_URL
-        ? String(process.env.REACT_APP_API_URL).replace(/\/$/, "")
-        : "";
-      const url = apiBase ? `${apiBase}/simulador/` : `/simulador/`;
-
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Error al conectar con el backend");
-
-      const data = await res.json();
+      const { data } = await api.post("/simulador", payload)
 
       // ✅ Guardar resultados localmente
       localStorage.setItem("resultadosSimulacion", JSON.stringify(data.resultados));

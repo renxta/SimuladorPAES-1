@@ -1,10 +1,10 @@
 import axios from "axios";
 
 // usa localhost en vez de 127.0.0.1
-const API_URL = "https://simuladorpaes-1-production.up.railway.app/api";
+const API_URL = process.env.NODE_ENV === "development"? "http://localhost:8000" : "https://simuladorpaes-1-production.up.railway.app";
 
 // ⚡ Crear instancia de axios con tamaño máximo aumentado
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
   headers: { "Content-Type": "application/json" },
   maxContentLength: Infinity,   // ← permite respuestas muy grandes
