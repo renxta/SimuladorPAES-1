@@ -5,9 +5,9 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
-from app.db import get_db  # tu SessionLocal y dependencia
+from db import get_db # tu SessionLocal y dependencia
 #
-from app import models
+import models
 
 router = APIRouter(prefix="/simulador", tags=["simulador"])
 

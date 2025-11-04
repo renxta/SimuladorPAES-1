@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from backend.app import simulador
+import simulador
 import os
 
 app = FastAPI(
@@ -14,7 +14,7 @@ app = FastAPI(
 # Middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # en producción puedes limitarlo a tu dominio
+    allow_origins=["*"],  # puedes restringir tu dominio en producción
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,7 +23,7 @@ app.add_middleware(
 # Incluir router principal
 app.include_router(simulador.router)
 
-# Endpoints de verificación
+# Endpoints base de verificación
 @app.get("/api", tags=["default"])
 def root_api():
     return {"ok": True, "msg": "Simulador PAES API"}
@@ -49,19 +49,10 @@ else:
     def no_frontend():
         return {"msg": "Frontend no compilado. Ejecuta 'npm run build' en la carpeta frontend."}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
-else:
-    @app.get("/")
-    def serve_placeholder():
-        return {
-            "msg": "El frontend aún no ha sido compilado. Ejecuta 'npm run build' en la carpeta frontend."
-        }
 
 # ----------------------------
-# EJECUCIÓN LOCAL
+# EJECUCIÓN LOCAL (solo para dev)
 # ----------------------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
