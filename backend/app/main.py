@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from . import simulador
 import os
+import logging
 
 app = FastAPI(
     title="Simulador PAES API",
@@ -24,7 +25,13 @@ app.add_middleware(
 app.include_router(simulador.router)
 
 # Servir archivos estáticos construidos por React (se asume que están en backend/app/static)
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+base_dir = os.path.dirname(__file__)
+static_dir = os.path.join(base_dir, "static")
+if os.path.isdir(static_dir):
+    # Usamos la ruta absoluta para evitar problemas con cwd
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+else:
+    logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
 
 # Endpoints base de verificación
 @app.get("/api", tags=["default"])
