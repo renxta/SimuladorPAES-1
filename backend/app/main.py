@@ -5,6 +5,8 @@ from fastapi.responses import FileResponse
 from . import simulador
 import os
 import logging
+import time
+from starlette.requests import Request
 
 app = FastAPI(
     title="Simulador PAES API",
@@ -32,6 +34,21 @@ if os.path.isdir(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 else:
     logging.warning(f"Static directory not found at {static_dir}. Frontend will not be served from backend.")
+
+
+# Middleware para loguear cada petición (método, path, status y tiempo)
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start_time = time.time()
+    try:
+        response = await call_next(request)
+    except Exception as exc:
+        # Loggear excepciones también
+        logging.exception(f"Error handling request {request.method} {request.url.path}")
+        raise
+    process_time = (time.time() - start_time) * 1000
+    logging.info(f"{request.client.host if request.client else 'unknown'} - {request.method} {request.url.path} -> {response.status_code} ({process_time:.2f}ms)")
+    return response
 
 # Endpoints base de verificación
 @app.get("/api", tags=["default"])
