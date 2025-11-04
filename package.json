@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:frontend": "cd frontend && npm start",
-    "start:backend:win": "cd backend && python -m uvicorn app.main:app --reload",
-    "start:backend:linux": "cd backend && python3 -m uvicorn app.main:app --reload",
-    "dev:win": "concurrently \"npm run start:backend:win\" \"npm run start:frontend\"",
-    "dev:linux": "concurrently \"npm run start:backend:linux\" \"npm run start:frontend\"",
-    "start": "cd backend && python -m uvicorn app.main:app"
+  "start:frontend": "cd frontend && npm start",
+  "start:backend:win": "cd backend && python -m uvicorn app.main:app --reload",
+  "start:backend:linux": "cd backend && python3 -m uvicorn app.main:app --reload",
+  "dev:win": "concurrently \"npm run start:backend:win\" \"npm run start:frontend\"",
+  "dev:linux": "concurrently \"npm run start:backend:linux\" \"npm run start:frontend\"",
+  "build:frontend": "cd frontend && npm ci --silent && npm run build",
+  "copy:frontend": "node scripts/copyBuild.js",
+  "build": "npm run build:frontend && npm run copy:frontend",
+  "start": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   },
   "repository": {
     "type": "git",
